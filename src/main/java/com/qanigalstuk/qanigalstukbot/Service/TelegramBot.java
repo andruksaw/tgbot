@@ -8,6 +8,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import com.qanigalstuk.qanigalstukbot.config.BotConfig;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
@@ -44,6 +47,7 @@ this.config = config;
 
     private void startCommandReceived(long chatId, String name) {
             String answer = "Assalom aleykum, " + name +", qani galstuk?";
+            log.info("Replied to user :" + name);
             senMessage(chatId, answer);
     }
 
@@ -56,7 +60,7 @@ this.config = config;
             execute(message);
         }
         catch(TelegramApiException e){
-
+            log.error("Error occured :" + e.getMessage());
         }
     }
     
